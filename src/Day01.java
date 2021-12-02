@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Day01 {
     public static void main(String[] args) throws IOException {
-        List<Integer> measurements = Files.readAllLines(Paths.get("resources/Day01/input.txt")).stream().map(Integer::parseInt).toList();
-        part1(measurements);
-        part2(measurements);
+        var measurements = Files.readAllLines(Paths.get("resources/Day01/input.txt")).stream().map(Integer::parseInt).toList();
+        System.out.println("Part 1: " + part1(measurements));
+        System.out.println("Part 2: " + part2(measurements));
     }
 
-    private static void part1(List<Integer> measurements) {
+    static int part1(List<Integer> measurements) {
         int previous = -1, result = -1;
         for (int measurement : measurements) {
             if (measurement > previous) {
@@ -18,10 +18,10 @@ public class Day01 {
             }
             previous = measurement;
         }
-        System.out.println("Part 1: " + result);
+        return result;
     }
 
-    private static void part2(List<Integer> measurements) {
+    static int part2(List<Integer> measurements) {
         int[] window = {-1, -1, -1};
         int sum, previousSum = -1, result = -3;
         for (int measurement : measurements) {
@@ -34,6 +34,6 @@ public class Day01 {
             }
             previousSum = sum;
         }
-        System.out.println("Part 2: " + result);
+        return result;
     }
 }
