@@ -1,11 +1,9 @@
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 public class Day01 {
     public static void main(String[] args) throws IOException {
-        var measurements = Files.readAllLines(Paths.get("resources/Day01/input.txt")).stream().map(Integer::parseInt).toList();
+        var measurements = Util.readInput("Day01").stream().map(Integer::parseInt).toList();
         System.out.println("Part 1: " + part1(measurements));
         System.out.println("Part 2: " + part2(measurements));
     }

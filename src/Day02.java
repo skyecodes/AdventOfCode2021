@@ -1,11 +1,9 @@
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 public class Day02 {
     public static void main(String[] args) throws IOException {
-        var commands = Files.readAllLines(Paths.get("resources/Day02/input.txt")).stream()
+        var commands = Util.readInput("Day02").stream()
                 .map(s -> s.split(" "))
                 .map(s -> new Command(s[0], Integer.parseInt(s[1])))
         .toList();
