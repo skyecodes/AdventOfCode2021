@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Util {
     static List<String> read(String... path) throws IOException {
-        return Files.readAllLines(Paths.get("resources", path));
+        return Files.readAllLines(Paths.get("src/main/resources", path));
     }
 
     static List<String> readExample(String day) throws IOException {

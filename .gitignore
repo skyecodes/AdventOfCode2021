@@ -2,3 +2,9 @@
 out/
 resources/
 .idea/
+
+gradlew
+gradlew.bat
+gradle/
+.gradle/
+build/

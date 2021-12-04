@@ -9,7 +9,7 @@ public class Day03 {
         System.out.println("Part 2: " + part2(diagnostic));
     }
 
-    private static int part1(List<String> diagnostic) {
+    static int part1(List<String> diagnostic) {
         var sum = new int[diagnostic.get(0).length()];
         diagnostic.forEach(s -> {
             for (int i = 0; i < sum.length; i++) {
@@ -34,7 +34,7 @@ public class Day03 {
         return gamma * epsilon;
     }
 
-    private static int part2(List<String> diagnostic) {
+    static int part2(List<String> diagnostic) {
         var oxygenList = new ArrayList<>(diagnostic);
         var co2List = new ArrayList<>(diagnostic);
         int oxygen = bin2int(filter(oxygenList, 0, false));
@@ -42,7 +42,7 @@ public class Day03 {
         return oxygen * co2;
     }
 
-    private static String filter(List<String> list, int index, boolean reversed) {
+    static String filter(List<String> list, int index, boolean reversed) {
         var sum = list.stream().filter(s -> s.charAt(index) == '1').count();
         var mostCommonBit = sum >= list.size() / 2.;
         var bitToKeep = mostCommonBit ^ reversed ? '1' : '0';
@@ -53,7 +53,7 @@ public class Day03 {
         return filter(list, index + 1, reversed);
     }
 
-    private static int bin2int(String s) {
+    static int bin2int(String s) {
         return Integer.parseInt(s, 2);
     }
 }
