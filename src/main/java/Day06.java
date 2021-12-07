@@ -6,11 +6,11 @@ public class Day06 {
         var initialFishes = Arrays.stream(Util.readInput("Day06").get(0).split(","))
                 .mapToInt(Integer::parseInt)
                 .toArray();
-        System.out.println("Part 1: " + run(initialFishes, 80));
-        System.out.println("Part 2: " + run(initialFishes, 256));
+        System.out.println("Part 1: " + simulate(initialFishes, 80));
+        System.out.println("Part 2: " + simulate(initialFishes, 256));
     }
 
-    static long run(int[] fishes, int days) {
+    static long simulate(int[] fishes, int days) {
         long[] values = new long[9];
         for (int fish : fishes) {
             values[fish]++;
