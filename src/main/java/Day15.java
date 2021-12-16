@@ -1,46 +1,31 @@
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Day15 {
-    static int[][] riskGrid, totalRiskGrid;
+    static int[][] riskMap, totalRiskMap;
     static int xSize, ySize;
 
     public static void main(String[] args) throws IOException {
-        riskGrid = Util.readInput("Day15").stream()
+        riskMap = Util.readInput("Day15").stream()
                 .map(s -> s.chars().map(Character::getNumericValue).toArray())
                 .toArray(int[][]::new);
         System.out.println("Part 1: " + dijkstra());
-        var newRiskGrid = new int[xSize * 5][ySize * 5];
-        for (int dy = 0; dy < 5; dy++) {
-            for (int dx = 0; dx < 5; dx++) {
-                for (int y = 0; y < ySize; y++) {
-                    for (int x = 0; x < xSize; x++) {
-                        int val = riskGrid[y][x] + dx + dy;
-                        if (val > 9) {
-                            val = val - 9;
-                        }
-                        newRiskGrid[(ySize * dy) + y][(xSize * dx) + x] = val;
-                    }
-                }
-            }
-        }
-        riskGrid = newRiskGrid;
+        var newRiskMap = new int[xSize * 5][ySize * 5];
+        IntStream.range(0, 5).forEach(dy -> IntStream.range(0, 5).forEach(dx -> IntStream.range(0, ySize).forEach(y -> IntStream.range(0, xSize).forEach(x -> newRiskMap[(ySize * dy) + y][(xSize * dx) + x] = (riskMap[y][x] + dx + dy - 1) % 9 + 1))));
+        riskMap = newRiskMap;
         System.out.println("Part 2: " + dijkstra());
     }
 
     static int dijkstra() {
-        ySize = riskGrid.length;
-        xSize = riskGrid[0].length;
-        totalRiskGrid = new int[ySize][xSize];
+        ySize = riskMap.length;
+        xSize = riskMap[0].length;
+        totalRiskMap = new int[ySize][xSize];
         var unsettledNodes = new HashSet<Node>();
         var settledNodes = new HashSet<Node>();
-        for (int y = 0; y < ySize; y++) {
-            for (int x = 0; x < xSize; x++) {
-                totalRiskGrid[y][x] = Integer.MAX_VALUE;
-            }
-        }
+        IntStream.range(0, ySize).forEach(y -> IntStream.range(0, xSize).forEach(x -> totalRiskMap[y][x] = Integer.MAX_VALUE));
         var start = new Node(0, 0);
         start.setTotalRisk(0);
         unsettledNodes.add(start);
@@ -78,15 +63,15 @@ public class Day15 {
         }
 
         int getRisk() {
-            return riskGrid[y][x];
+            return riskMap[y][x];
         }
 
         int getTotalRisk() {
-            return totalRiskGrid[y][x];
+            return totalRiskMap[y][x];
         }
 
         void setTotalRisk(int dist) {
-            totalRiskGrid[y][x] = dist;
+            totalRiskMap[y][x] = dist;
         }
     }
 }
