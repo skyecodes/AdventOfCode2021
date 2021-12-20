@@ -104,8 +104,6 @@ public class Day19 {
             absoluteBeacons = getBeacons(absolutePos, orientation).toList();
             this.absolutePos = absolutePos;
         }
-
-
     }
 
     record Pos(int x, int y, int z) {
